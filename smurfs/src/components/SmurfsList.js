@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
+import { SmurfContext } from "../context/smurfContext";
 
 const SmurfsList = () => {
+  const { smurfData } = useContext(SmurfContext);
   return (
     <div>
-      <p>wow</p>
+      {smurfData.map(smurf => (
+        <>
+          <p>{smurf.name}</p>
+          <p>{smurf.age}</p>
+          <p>{smurf.height}</p>
+        </>
+      ))}
     </div>
   );
 };
