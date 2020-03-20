@@ -1,23 +1,45 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 const SmurfsForm = () => {
-  const handleSubmit = e => {
-    e.preventDefault();
+  const [newSmurf, setNewSmurf] = useState({
+    name: "",
+    age: "",
+    height: ""
+  });
+
+  const handleChange = e => {
+    setNewSmurf({
+      ...newSmurf,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const axiosCall = () => {
+    axios
+      .get("http://localhost:3333/smurfs")
+      .catch(err => console.log("you messed up the post request", err));
+  };
+
+  const handleSubmit = () => {
+    axios.post("http://localhost:3333/smurfs", newSmurf).then(response => {
+      console.log(response);
+    });
   };
 
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <label>name</label>
-        <input name="smurfName" />
-
-        <label>height</label>
-        <input name="height" />
+        <label>Smurf Name</label>
+        <input name="name" onChange={handleChange} />
 
         <label>Age</label>
-        <input name="age" />
+        <input name="age" onChange={handleChange} />
 
-        <button>submit new Smurf</button>
+        <label>Height</label>
+        <input name="height" onChange={handleChange} />
+
+        <button>Submit New Smurf</button>
       </form>
     </div>
   );

@@ -17,14 +17,10 @@ const App = () => {
       .catch(error => console.log("u messed up", error));
   }, []);
 
-  const addSmurf = smurf => {
-    setSmurfData([...smurfData, smurf]);
-  };
-
   return (
     <div className="App">
       <h1>Smurfs with context api</h1>
-      <SmurfContext.Provider value={{ setSmurfData, smurfData, addSmurf }}>
+      <SmurfContext.Provider value={{ setSmurfData, smurfData }}>
         <SmurfsForm />
         <SmurfsList />
       </SmurfContext.Provider>
