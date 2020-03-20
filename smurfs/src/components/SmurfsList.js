@@ -1,16 +1,13 @@
 import React, { useContext } from "react";
 import { SmurfContext } from "../context/smurfContext";
+import SmurfCard from "./SmurfCard";
 
 const SmurfsList = () => {
   const { smurfData } = useContext(SmurfContext);
   return (
     <div>
       {smurfData.map(smurf => (
-        <>
-          <p>{smurf.name}</p>
-          <p>{smurf.age}</p>
-          <p>{smurf.height}</p>
-        </>
+        <SmurfCard key={smurf.id} smurf={smurf} />
       ))}
     </div>
   );
